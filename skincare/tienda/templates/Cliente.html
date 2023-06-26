@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+{% block titulo %} Realizar compra {% endblock %}
+{% block content %}
+<br><br>
+<div class="d-flex justify-content-center align-items-center">
+    <h2 class=" text-center">Ingresa tus datos</h2>
+</div>
+<br><br>
+<div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+    <form method="POST">
+        {% csrf_token %}
+        <table class="table table-striped mx-auto" style="width: 50vh;">
+            {{form}}
+            <tr>
+                <td><label for="id_total">Total:</label></td>
+                <td><input type="text" id="id_total" name="total"></td>
+            </tr>
+            <tr>
+                <td><label for="id_telefono">Teléfono:</label></td>
+                <td><input type="text" id="id_telefono" name="telefono"></td>
+            </tr>
+        </table>
+        <button class="btn btn-outline-primary d-block mx-auto">Pagar</button>
+    </form>
+</div>
+{% endblock %}

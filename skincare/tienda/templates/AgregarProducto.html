@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% block titulo %} Agregar producto {% endblock %}
+{% block content %}
+    <br>
+    <div class="container">
+        <h2>Agregar ropa</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table table-striped">
+            {{ form.as_p }}
+        </table>
+        <button class="btn btn-warning btn-lg"   style="background-color: rgba(6, 153, 151, 0.599);" style="margin-left: 370px;">Agregar</button>
+    </form>
+    </div>
+      
+{% endblock %}

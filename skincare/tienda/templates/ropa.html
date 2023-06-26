@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+{% block titulo %}Productos {% endblock %}
+{% block content %}
+<br>
+<div><h3 style="margin-left: 450px;">Administracion de mercancia</h3> <br>
+    <a href="{% url 'tienda:agregar' %}" class="btn btn-warning btn-lg" style="background-color: rgba(6, 153, 151, 0.599);">AGREGAR </a>
+</div>
+    <table class="table table-hover" style="margin-left: 250px;">
+        <thead>
+            <tr>
+                <th><h5>Producto</h5></th>
+                <th><h5>Precio</h5></th>
+                <th><h5>Acciones</h5></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in productos %}
+                <tr>
+                    <td><img src="{{ p.imagen.url }}" width="80" height="100"></td>
+                    <td>${{p.precio}}</td>
+                    <td>
+                        <a href="{% url 'tienda:actualizar' p.id %}" class="btn btn-info" style="background-color: rgb(109, 176, 175);"> Editar</a>
+                        <a href="{% url 'tienda:delete' p.id %}" class="btn btn-info" style="background-color: rgba(255, 107, 15, 0.599);"> Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+{% endblock %}

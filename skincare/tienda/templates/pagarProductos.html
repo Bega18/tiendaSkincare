@@ -1,0 +1,59 @@
+{% extends "base_generic.html" %}
+{% load custom_tags %}
+{% block titulo %} Pagar Productos {% endblock %}
+{% block content %}
+<br><br>
+<div class="float-left">
+    <a href="{% url 'tienda:tienda' %}" class="btn btn-dark">Seguir comprando</a>
+</div>
+<br><br>
+<div class="alert alert-primary" role="alert" style="margin-left: 380px;">
+  
+    <table class="table table-bordered" style="border: 0px;">
+        <thead>
+            <tr>
+                <th scope="row" colspan="5" class="text-center">Carrito de productos seleccionados</th>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if request.session.carrito.items %}
+            {% with total=0 %}
+            {% for key, value in request.session.carrito.items %}
+            <tr class="table">
+                <td>{{value.id}}</td>
+                <td>{{value.nombre}}</td>
+                <td>${{value.precio}}  --- {{value.cantidad}}pz</td>
+                <td>
+                    <a href="{% url 'eliminarCarrito' value.id %}" class="btn btn-outline-danger btn-sm">- 1</a>
+                </td>
+            </tr>
+            {% with value.acumulado as acumulado %}
+            {% sum_values total acumulado as total %}
+            {% endwith %}
+            {% endfor %}
+            <tr>
+                {% if request.session.carrito.items %}
+            <tr>
+                <td colspan="2" style="font-weight: bold;">Total:</td>
+                <td colspan="2" style="font-weight: bold;">Total: ${{ request.session.carrito|total }}</td>
+            </tr>
+            {% endif %}
+            </tr>
+            {% endwith %}
+            {% endif %}
+        </tbody>
+    </table>
+    {% if user.is_authenticated %}
+    <a href="{% url 'generar_pdf' %}" class="btn btn-danger" style="background-color: rgb(128, 128, 186);">Proceder con el pago</a>
+
+    {% else %}
+    <a href="" class="btn btn-danger" style="background-color: rgb(128, 128, 186);">Proceder con el pago</a>
+    {% endif %}
+</div>
+{% endblock %}

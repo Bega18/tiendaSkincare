@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+{% block titulo %} Actualizar producto {% endblock %}
+{% block content %}
+    <div class="container">
+        <h3>Agregar un nuevo Producto</h3>
+        <h2 class="text-white">.</h2>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <table class="table table-striped">
+            {{form}}
+        </table>
+        <button class="btn btn-outline-warning" style="background-color: rgba(6, 153, 151, 0.599);">ACEPTAR</button>
+    </form>
+{% endblock %}
